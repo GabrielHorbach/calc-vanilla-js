@@ -1,0 +1,33 @@
+.wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+}
+
+input {
+    width: 246px;
+}
+
+[data-js=buttonsNumbers], [data-js=buttonEqual], [data-js=buttonCe] {
+    width: 38px;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    float: left;
+    width: 50%;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    align-items: flex-end
+}
+
+.right  button {
+    width: 100%;
+}
