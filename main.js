@@ -24,11 +24,7 @@
     }
 
     function handleClickOperator() {
-        var operators = ['+', '-', 'x', '÷'];
-
-        if (operators.includes($visor.value.split('').pop()))
-            $visor.value = $visor.value.slice(0, -1);
-
+        $visor.value = removeOperatorIfLastChar($visor.value);
         $visor.value += this.value;
     }
 
@@ -37,6 +33,50 @@
     }
 
     function handleClickEqual() {
+        var values = $visor.value.match(/\d+[\+x÷-]?/g);
+
+        values.reduce(function(accumulator, currentValue){
+            var firstValue = removeOperatorIfLastChar(accumulator);
+            var operator = (isLastCharOperator(accumulator)) ? returnLastChar(accumulator) : null;
+            var secondValue = currentValue;
+
+            switch (operator) {
+                case '+':
+                    $visor.value = (Number(firstValue) + Number(secondValue));
+                    break;
+                
+                case '-':
+                    $visor.value = (Number(firstValue) - Number(secondValue));
+                    break;
+
+                case 'x':
+                    $visor.value = (Number(firstValue) * Number(secondValue));
+                    break;
+                
+                case '÷':
+                    $visor.value = (Number(firstValue) / Number(secondValue));
+                    break;
+                
+                default:
+                    break;
+            }
+        });
+    }
+
+    function removeOperatorIfLastChar(value) {
+        if (isLastCharOperator(value))
+            return value.slice(0, -1);
         
+        return value;
+    }
+
+    function isLastCharOperator(value) {
+        var operators = ['+', '-', 'x', '÷'];
+
+        return operators.includes(returnLastChar(value));
+    }
+
+    function returnLastChar(value) {
+        return value.split('').pop();
     }
 })(window, document);
