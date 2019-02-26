@@ -4,10 +4,17 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 250px;
+    border: 1px solid grey;
+    padding: 5px
 }
 
 input {
-    width: 246px;
+    width: 95%;
+    outline: none;
+    border: 1px solid grey;
+    margin-bottom: 5px;
+    padding: 5px;
+    text-align: right
 }
 
 [data-js=buttonsNumbers], [data-js=buttonEqual], [data-js=buttonCe] {

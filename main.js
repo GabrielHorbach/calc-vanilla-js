@@ -8,16 +8,15 @@
     var $buttonEqual = doc.querySelector('[data-js=buttonEqual]');
     var $buttonCe = doc.querySelector('[data-js=buttonCe]');
 
-    Array.prototype.forEach.call($buttonsNumbers, function(item) {
+    $buttonsNumbers.forEach(function(item) {
         item.addEventListener('click', handleClickNumber, false);
     });
     
-    Array.prototype.forEach.call($buttonsOperations, function(item) {
+    $buttonsOperations.forEach(function(item) {
         item.addEventListener('click', handleClickOperator, false);
     });
 
     $buttonCe.addEventListener('click', handleClickCe, false);
-
     $buttonEqual.addEventListener('click', handleClickEqual, false);
 
     function handleClickNumber() {
