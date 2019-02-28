@@ -33,34 +33,38 @@
     }
 
     function handleClickEqual() {
+        $visor.value = removeOperatorIfLastChar($visor.value);
         var values = $visor.value.match(/\d+[\+x÷-]?/g);
 
-        values.reduce(function(accumulator, currentValue){
+        console.log(values);
+
+        var result = values.reduce(function(accumulator, currentValue){
+            console.table(accumulator, currentValue);
+
             var firstValue = removeOperatorIfLastChar(accumulator);
             var operator = (isLastCharOperator(accumulator)) ? returnLastChar(accumulator) : null;
-            var secondValue = currentValue;
-
+            var secondValue = removeOperatorIfLastChar(currentValue);
+            var lastOperator = (isLastCharOperator(currentValue)) ? returnLastChar(currentValue) : null;
+        
             switch (operator) {
                 case '+':
-                    $visor.value = (Number(firstValue) + Number(secondValue));
-                    break;
+                    return (Number(firstValue) + Number(secondValue)) + lastOperator;
                 
                 case '-':
-                    $visor.value = (Number(firstValue) - Number(secondValue));
-                    break;
+                    return (Number(firstValue) - Number(secondValue)) + lastOperator;
 
                 case 'x':
-                    $visor.value = (Number(firstValue) * Number(secondValue));
-                    break;
+                    return (Number(firstValue) * Number(secondValue)) + lastOperator;
                 
                 case '÷':
-                    $visor.value = (Number(firstValue) / Number(secondValue));
-                    break;
+                    return (Number(firstValue) / Number(secondValue)) + lastOperator;
                 
                 default:
                     break;
             }
         });
+
+        $visor.value = result;
     }
 
     function removeOperatorIfLastChar(value) {
@@ -77,6 +81,6 @@
     }
 
     function returnLastChar(value) {
-        return value.split('').pop();
+        return value.toString().split('').pop();
     }
 })(window, document);
